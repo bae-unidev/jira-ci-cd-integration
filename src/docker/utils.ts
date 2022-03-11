@@ -56,11 +56,11 @@ export async function getIssueKeys(): Promise<string[]> {
   const branchName = getBranchName()
   const commitMessage = await getCommitMessage()
 
-  const fromInput = process.env.JIRA_ISSUES?.match(/(\w+)-(\d+)/g) ?? []
+  const fromInput = process.env.JIRA_ISSUES?.match(/[a-zA-Z](\w+)-(\d+)/g) ?? []
 
-  const fromBranch = branchName?.match(/(\w+)-(\d+)/g) ?? []
+  const fromBranch = branchName?.match(/[a-zA-Z](\w+)-(\d+)/g) ?? []
 
-  const fromCommit = commitMessage?.match(/(\w+)-(\d+)/g) ?? []
+  const fromCommit = commitMessage?.match(/[a-zA-Z](\w+)-(\d+)/g) ?? []
 
   const issueKeys = [...fromInput, ...fromBranch, ...fromCommit].filter(
     (value, index, array) => {
